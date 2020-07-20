@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Giftr 2.0</title>
+         <!-- The core Firebase JS SDK is always required and must be listed first -->
+         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-firestore.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+         <script defer src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
+
+         <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+               <!-- Initialize Firebase -->
+        <script src="script.js"></script>
+    </head>
+    <body>
+
+        <div>
+            <input id="txtEmail" type="email" placeholder="Email">
+            <input id="txtPassword" type="password" placeholder="Password">
+
+            <button id="btnLogin" class="btn" onclick = "loginClick()">
+                Log In
+            </button>
+
+            <button id="btnSignUp" class="btn" onclick = "signUpClick()">
+                Sign Up
+            </button>
+
+            <button id="btnLogout" class="btn hide" onclick = "logOutClick()">
+                Log Out
+            </button>
+            <button onclick="extractUserInfo()">Extract Info</button>
+        </div>
+
+        <div>
+            <label>Interests:</label>
+            <input type="text" id="interest">
+            <button onclick="submitInfo()">Enter Info</button>
+        </div>
+
+        <pre id="object">
+
+        </pre>
+    </body>
+</html>
