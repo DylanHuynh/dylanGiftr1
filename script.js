@@ -1,4 +1,7 @@
 
+
+    let interestArray;
+    let currentUid;
     // Your web app's Firebase configuration
     var firebaseConfig = {
         apiKey: "AIzaSyAMRm69bulBYsSReP1DOXLex61JgPUYFtw",
@@ -59,14 +62,18 @@
         function inApp() {
             //Add a realtime listener
             const auth = firebase.auth();
-            const proise = auth.onAuthStateChanged(firebaseUser => {
+            const promise = auth.onAuthStateChanged(firebaseUser => {
                 if (firebaseUser) {
                     console.log(firebaseUser);
                 } else {
                     console.log('not logged in');
                 }
-                console.log(firebaseUser.email);
-                debugger;
+                currentUid = firebaseUser.uid;
+                writeUserData(firebaseUser.uid,firebaseUser.email);
+                if (interestArray!=null) {
+                    writeUserInterest(currentUid,interestArray);
+                    interestArray=[];
+                }
             });
 
         }
@@ -95,6 +102,29 @@
     }
 
     const preObject = document.getElementById('object');
-    const dbRefObject = firebase.database().ref().child('object');
+    const dbRefObject = firebase.database().ref().child("Object");
     dbRefObject.on('value',snap => console.log(snap.val()));
 
+    function writeUserData(userId, email){
+        console.log("userId");
+        firebase.database().ref("users/" + userId).set({
+            email: email,
+            interests: "empty"
+        });
+        firebase.database().ref("users/" + userId).child("email").on("value", snap => {
+          console.log("database email: " + snap.val());
+
+        });
+      }
+    function writeUserInterest(userId, interests){
+        for (var i = 0 ; i < interests.length;i++) {
+            firebase.database().ref("users/" + userId +"/interests").push(interests[i]);
+        }
+    }
+
+    function setInterests(userId) {
+        interestList = document.getElementById('interest').value
+        interestArray = separateInterests(interestList);
+        inApp();
+    // separateInterests(interestList);
+    }
