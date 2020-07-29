@@ -1,6 +1,6 @@
 
-
-    let interestArray;
+    var interestIndex = 1;
+    let interestArray = [];
     let currentUid;
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -122,9 +122,22 @@
         }
     }
 
-    function setInterests(userId) {
-        interestList = document.getElementById('interest').value
-        interestArray = separateInterests(interestList);
+    function setInterests() {
+
+        let interestInputArray = document.getElementsByClassName('interestInput');
+        for (const element of interestInputArray) {
+            console.log(element.value);
+            interestArray.push(element.value);
+        }
+        console.log(interestArray);
+
         inApp();
     // separateInterests(interestList);
+    }
+
+    function appendInterest() {
+      lastInterestBlock = document.getElementsByClassName("interest")[document.getElementsByClassName("interest").length-1];
+      lastInterestBlock.innerHTML += '<div class="interest"><input class="interestInput" type="text" id="interest'+interestIndex+'"></div>';
+      interestIndex++;
+      console.log(interestIndex);
     }

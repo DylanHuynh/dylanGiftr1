@@ -30,12 +30,16 @@
                 Log Out
             </button>
             <button onclick="extractUserInfo()">Extract Info</button>
+
         </div>
 
         <div>
             <label>Interests:</label>
-            <input type="text" id="interest">
+            <div class="interest">
+                <input type="text" id="interest0" class="interestInput">
+            </div>
             <button onclick="setInterests()">Enter Info</button>
+            <button onclick="appendInterest()">Add Interest</button>
         </div>
 
         <pre id="object">
